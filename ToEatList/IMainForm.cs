@@ -7,6 +7,11 @@ namespace Tangor.ToEatList
     public interface IMainForm
     {
         event UserLoginEventHandler UserLogin;
+        event EventHandler UserLogoff;
+
         event EventHandler MainFormClosed;
+
+        void LoadProfile(IUserInfo userInfo);
+        void LoadLoginForm();
     }
 }

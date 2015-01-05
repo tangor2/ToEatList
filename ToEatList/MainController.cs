@@ -1,13 +1,10 @@
-﻿using System.Windows.Forms;
-
-namespace Tangor.ToEatList
+﻿namespace Tangor.ToEatList
 {
     public class MainController
     {
         public IMainForm Form { get; private set; }
 
         public bool IsUserLoggedIn { get; private set; }
-        public bool IsDisposed { get; private set; }
 
         private IUserManager Users { get; set; }
 
@@ -23,7 +20,15 @@ namespace Tangor.ToEatList
 
             this.Form = form;
             this.Form.UserLogin += Form_UserLogin;
+            this.Form.UserLogoff += Form_UserLogoff;
             this.Form.MainFormClosed += Form_MainFormClosed;
+        }
+
+        private void Form_UserLogoff(object sender, System.EventArgs e)
+        {
+            this.IsUserLoggedIn = false;
+
+            this.Form.LoadLoginForm();
         }
 
         private void Form_MainFormClosed(object sender, System.EventArgs e)
@@ -34,6 +39,7 @@ namespace Tangor.ToEatList
         public void Dispose()
         {
             this.Form.UserLogin -= Form_UserLogin;
+            this.Form.UserLogoff -= Form_UserLogoff;
             this.Form.MainFormClosed -= Form_MainFormClosed;
         }
 
@@ -45,6 +51,11 @@ namespace Tangor.ToEatList
         public void Login(string testuser, string testpass)
         {
             this.IsUserLoggedIn = this.Users.Authorize(testuser, testpass);
+
+            if (this.IsUserLoggedIn)
+            {
+                this.Form.LoadProfile(this.Users.CurrentUserInfo);
+            }
         }
     }
 }

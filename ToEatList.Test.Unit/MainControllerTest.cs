@@ -96,6 +96,46 @@ namespace Tangor.ToEatList
         }
 
         [TestMethod]
+        public void Login_FormLoadProfileCalled_Test()
+        {
+            IMainForm form = MockRepository.GenerateStub<IMainForm>();
+
+            MainController controller = new MainController(form);
+
+            form.Raise(x => x.UserLogin += null, "testUser", "testPass");
+
+            form.AssertWasCalled(x => x.LoadProfile(Arg<IUserInfo>.Is.NotNull));
+        }
+
+        [TestMethod]
+        public void Logoff_LogoffByForm_IsUserLoggedInIsFalse_Test()
+        {
+            IMainForm form = MockRepository.GenerateStub<IMainForm>();
+
+            MainController controller = new MainController(form);
+
+            form.Raise(x => x.UserLogin += null, "testUser", "testPass");
+
+            form.Raise(x => x.UserLogoff += null, null, EventArgs.Empty);
+
+            Assert.IsFalse(controller.IsUserLoggedIn);
+        }
+
+        [TestMethod]
+        public void Logoff_LogoffByForm_LoadLoginFormCalled_Test()
+        {
+            IMainForm form = MockRepository.GenerateStub<IMainForm>();
+
+            MainController controller = new MainController(form);
+
+            form.Raise(x => x.UserLogin += null, "testUser", "testPass");
+
+            form.Raise(x => x.UserLogoff += null, null, EventArgs.Empty);
+
+            form.AssertWasCalled(x => x.LoadLoginForm());
+        }
+
+        [TestMethod]
         public void Dispose_FormOnClosedEventRemoved_Test()
         {
             IMainForm form = MockRepository.GenerateStub<IMainForm>();
