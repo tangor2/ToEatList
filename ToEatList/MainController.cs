@@ -7,6 +7,7 @@ namespace Tangor.ToEatList
         public IMainForm Form { get; private set; }
 
         public bool IsUserLoggedIn { get; private set; }
+        public bool IsDisposed { get; private set; }
 
         private IUserManager Users { get; set; }
 

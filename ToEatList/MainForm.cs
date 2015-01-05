@@ -13,7 +13,7 @@ namespace Tangor.ToEatList
             InitializeComponent();
         }
 
-        protected override void OnClosed(System.EventArgs e)
+        protected override void OnClosed(EventArgs e)
         {
             base.OnClosed(e);
 
