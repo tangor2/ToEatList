@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Tangor.ToEatList.Articles;
 
 namespace Tangor.ToEatList
 {
@@ -13,5 +15,7 @@ namespace Tangor.ToEatList
 
         void LoadProfile(IUserInfo userInfo);
         void LoadLoginForm();
+
+        void LoadArticles(List<IArticle> articles);
     }
 }

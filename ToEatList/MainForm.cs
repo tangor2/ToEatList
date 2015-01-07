@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
+using Tangor.ToEatList.Articles;
 
 namespace Tangor.ToEatList
 {
@@ -43,12 +45,25 @@ namespace Tangor.ToEatList
            initLoginForm();
         }
 
+        public void LoadArticles(List<IArticle> articles)
+        {
+            ArticleListControl articleListControl =  new ArticleListControl();
+            articleListControl.Dock = DockStyle.Fill;
+            articleListControl.BringToFront();
+
+            this.Controls.Add(articleListControl);
+
+            articleListControl.LoadArticles(articles);
+        }
+
         private void initLoginForm()
         {
             _loginUserControl = new LoginUserControl();
             _loginUserControl.UserLogin += onUserLogin;
 
             this.Controls.Add(_loginUserControl);
+
+            //this.AcceptButton = _loginUserControl.
         }
 
         private void onUserLogoff(object sender, EventArgs e)

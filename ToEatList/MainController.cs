@@ -1,4 +1,7 @@
-﻿namespace Tangor.ToEatList
+﻿using System.Collections.Generic;
+using Tangor.ToEatList.Articles;
+
+namespace Tangor.ToEatList
 {
     public class MainController
     {
@@ -8,7 +11,8 @@
 
         private IUserManager Users { get; set; }
 
-        public MainController(): this(new MainForm())
+        public MainController()
+            : this(new MainForm())
         {
         }
 
@@ -54,8 +58,19 @@
 
             if (this.IsUserLoggedIn)
             {
-                this.Form.LoadProfile(this.Users.CurrentUserInfo);
+                IUserInfo user = this.Users.CurrentUserInfo;
+
+                this.Form.LoadProfile(user);
+
+                LoadArticles(user);
             }
+        }
+
+        public void LoadArticles(IUserInfo user)
+        {
+            List<IArticle> articles = new List<IArticle> {new Cola(), new ColaZero(), new Mars()};
+
+            this.Form.LoadArticles(articles);
         }
     }
 }

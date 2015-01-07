@@ -50,6 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Articles\ArticleListControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Articles\ArticleListControl.Designer.cs">
+      <DependentUpon>ArticleListControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Articles\Cola.cs" />
+    <Compile Include="Articles\ColaZero.cs" />
+    <Compile Include="Articles\IArticle.cs" />
     <Compile Include="IMainForm.cs" />
     <Compile Include="IUserInfo.cs" />
     <Compile Include="LoginUserControl.cs">
@@ -67,6 +76,7 @@
     <Compile Include="IUser.cs" />
     <Compile Include="IUserManager.cs" />
     <Compile Include="MainController.cs" />
+    <Compile Include="Articles\Mars.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User.cs" />
@@ -77,6 +87,9 @@
     <Compile Include="UserProfilControl.Designer.cs">
       <DependentUpon>UserProfilControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Articles\ArticleListControl.resx">
+      <DependentUpon>ArticleListControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginUserControl.resx">
       <DependentUpon>LoginUserControl.cs</DependentUpon>
     </EmbeddedResource>
